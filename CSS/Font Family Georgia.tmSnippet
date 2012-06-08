@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Font Family: Georgia</string>
+        <key>uuid</key>
+        <string>DC640DAD-27C7-4371-B2C7-C9E1EC9C11BA</string>
+        <key>tabTrigger</key>
+        <string>georgia</string>
+        <key>content</key>
+        <string>Georgia,&quot;Nimbus Roman No9 L&quot;,serif;</string>
+        <key>scope</key>
+        <string></string>
+    </dict>
+</plist>

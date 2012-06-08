@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>transparent png bg</string>
+        <key>uuid</key>
+        <string>2DF2D12F-FCAB-408F-86F6-E40594F4FCFD</string>
+        <key>tabTrigger</key>
+        <string>pngbg</string>
+        <key>content</key>
+        <string>.${1:element} { /* IE */
+	//filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale src=${2:'images.png}');}
+.$1[class]{background:transparent url($2) ${3:no-repeat center center};}</string>
+        <key>scope</key>
+        <string>source.css</string>
+    </dict>
+</plist>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Print Image</string>
+        <key>uuid</key>
+        <string>A00B2BD9-D254-43D2-96AC-AC81FC9C6414</string>
+        <key>tabTrigger</key>
+        <string>printimage</string>
+        <key>content</key>
+        <string>#${1:ti\tle} {display:list-item; list-style-image:url($2); list-style-position:inside; letter-spacing:-1000em; font-size:1pt; color:#fff; width:$3; height:$4;}</string>
+        <key>scope</key>
+        <string>source.css</string>
+    </dict>
+</plist>

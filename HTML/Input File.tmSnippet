@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Input File</string>
+        <key>uuid</key>
+        <string>5A800875-2A93-4B6B-A62B-ACE08FF3B110</string>
+        <key>tabTrigger</key>
+        <string>file</string>
+        <key>content</key>
+        <string>&lt;div class=&quot;file&quot;&gt;&lt;label for=&quot;$1&quot;&gt;$2:&lt;/label&gt;&lt;input type=&quot;file&quot; id=&quot;$1&quot; name=&quot;$1&quot; /&gt;&lt;/div&gt;$3</string>
+        <key>scope</key>
+        <string>text.html</string>
+    </dict>
+</plist>

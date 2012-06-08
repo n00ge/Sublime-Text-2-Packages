@@ -1,0 +1,6 @@
+{
+  "osx": {
+    "cmd": ["open", "-a", "Marked", "$file"]
+  },
+  "selector": "text.html.markdown"
+}

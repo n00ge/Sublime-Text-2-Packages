@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Font Family: Script</string>
+        <key>uuid</key>
+        <string>EB33799E-375A-4CD2-BEAE-4CA0DD1E11B1</string>
+        <key>tabTrigger</key>
+        <string>script</string>
+        <key>content</key>
+        <string>"Brush Script MT","Monotype Corsiva",script</string>
+        <key>scope</key>
+        <string>source.css</string>
+    </dict>
+</plist>

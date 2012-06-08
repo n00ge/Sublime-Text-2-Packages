@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[before(:each) do
+  $0
+end]]></content>
+    <tabTrigger>before</tabTrigger>
+    <scope>source.ruby.rails</scope>
+    <description>before(:each) do ... end</description>
+</snippet>

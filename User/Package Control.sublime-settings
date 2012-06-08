@@ -1,0 +1,33 @@
+{
+	"auto_upgrade_last_run": 1338869355,
+	"installed_packages":
+	[
+		"Alignment",
+		"BeautifyRuby",
+		"FileDiffs",
+		"Git",
+		"Guard",
+		"Haml",
+		"Nettuts+ Fetch",
+		"Package Control",
+		"Prefixr",
+		"RSpec",
+		"RubyTest",
+		"SCSS.tmbundle",
+		"SideBarEnhancements",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"Theme - Nil",
+		"Theme - Soda",
+		"Theme - Soda Refined",
+		"VintageEx",
+		"ZenCoding"
+	],
+	"repositories":
+	[
+		"https://github.com/kuroir/SCSS.tmbundle",
+		"https://github.com/brickattack/Sublime-Coffeescript",
+		"https://github.com/brickattack/Sublime-Ruby-Haml",
+		"https://github.com/brickattack/RSpec"
+	]
+}

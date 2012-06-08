@@ -1,0 +1,13 @@
+[
+    {
+        "caption": "Fetch",
+        "command": "fetch"
+    },
+    {
+        "caption": "Fetch: Manage remote files",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/User/Fetch.sublime-settings"
+        }
+    }
+]

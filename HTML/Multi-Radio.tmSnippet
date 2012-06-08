@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Multi-Radio</string>
+        <key>uuid</key>
+        <string>C3C2A360-E725-4802-B0C0-7784DF176FD9</string>
+        <key>tabTrigger</key>
+        <string>multiradio</string>
+        <key>content</key>
+        <string>&lt;fieldset class=&quot;multichoice&quot;&gt;
+	&lt;legend&gt;$1&lt;/legend&gt;
+	&lt;div class=&quot;radio&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;$2&quot; id=&quot;$3&quot; /&gt;&lt;label for=&quot;$3&quot;&gt;$4&lt;/label&gt;&lt;/div&gt;
+	&lt;div class=&quot;radio&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;$2&quot; id=&quot;$5&quot; /&gt;&lt;label for=&quot;$5&quot;&gt;$6&lt;/label&gt;&lt;/div&gt;
+	&lt;div class=&quot;radio&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;$2&quot; id=&quot;$7&quot; /&gt;&lt;label for=&quot;$7&quot;&gt;$8&lt;/label&gt;&lt;/div&gt;$9
+&lt;/fieldset&gt;</string>
+        <key>scope</key>
+        <string>text.html</string>
+    </dict>
+</plist>

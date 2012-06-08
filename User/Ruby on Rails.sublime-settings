@@ -1,0 +1,8 @@
+{
+	"extensions":
+	[
+		"rb",
+		"Guardfile",
+		"prawn"
+	]
+}

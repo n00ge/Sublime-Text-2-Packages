@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Font Family: Trebuchet MS</string>
+        <key>uuid</key>
+        <string>259153D4-07EF-46E8-8A78-621C8D8FE72B</string>
+        <key>tabTrigger</key>
+        <string>trebuchet</string>
+        <key>content</key>
+        <string>&quot;Trebuchet MS&quot;,Helvetica,Jamrul,sans-serif;</string>
+        <key>scope</key>
+        <string></string>
+    </dict>
+</plist>

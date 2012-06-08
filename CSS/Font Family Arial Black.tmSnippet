@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Font Family: Arial Black</string>
+        <key>uuid</key>
+        <string>0F19A30F-E53F-4EAA-9365-7F8B88C09FFF</string>
+        <key>tabTrigger</key>
+        <string>arialblack</string>
+        <key>content</key>
+        <string>&quot;Arial Black&quot;,Gadget,sans-serif;</string>
+        <key>scope</key>
+        <string></string>
+    </dict>
+</plist>

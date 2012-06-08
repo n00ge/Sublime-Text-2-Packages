@@ -1,0 +1,5 @@
+{
+   "cmd": ["/Users/n00ge/.rvm/bin/ruby", "-cw", "$file"],
+   "file_regex": "^(...*?):([0-9]*):?([0-9]*)",
+   "selector": "source.ruby"
+}

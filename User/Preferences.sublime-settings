@@ -1,0 +1,44 @@
+{
+	"auto_complete_commit_on_tab": false,
+	"codeintel_syntax_map":
+	{
+		"Python Django": "python",
+		"Ruby on Rails": "ruby"
+	},
+	"color_scheme": "Packages/User/Railscast2.tmTheme",
+	"draw_minimap_border": true,
+	"font_face": "DejaVu Sans Mono",
+	"font_options":
+	[
+		"subpixel_antialias"
+	],
+	"font_size": 13.0,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Vintage",
+		"VintageEx"
+	],
+	"open_files_in_new_window": false,
+	"scroll_past_end": true,
+	"sublimelint": true,
+	"sublimelinter_disable":
+	[
+		"python"
+	],
+	"sublimelinter_executable_map":
+	{
+		"php": "php",
+		"ruby": "/Users/n00ge/.rvm/rubies/ruby-1.9.2-p290/bin/ruby"
+	},
+	"sublimelinter_syntax_map":
+	{
+		"Ruby on Rails": "ruby"
+	},
+	"tab_completion": true,
+	"tab_size": 2,
+	"theme": "Nil.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"word_wrap": "true"
+}

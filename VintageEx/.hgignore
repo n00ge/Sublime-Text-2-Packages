@@ -1,0 +1,14 @@
+syntax: glob
+
+*.pyc
+*.sublime-workspace
+*.sublime-project
+*.cache
+
+MANIFEST
+dist
+
+tags
+tags_sorted_by_file
+
+_*.txt

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Font Family: Palatino Linotype</string>
+        <key>uuid</key>
+        <string>59DD0B09-7E15-4BB3-B17F-09674215B51D</string>
+        <key>tabTrigger</key>
+        <string>palatino</string>
+        <key>content</key>
+        <string>&quot;Palatino Linotype&quot;,&quot;Book Antiqua&quot;,Palatino,FreeSerif,serif;</string>
+        <key>scope</key>
+        <string></string>
+    </dict>
+</plist>

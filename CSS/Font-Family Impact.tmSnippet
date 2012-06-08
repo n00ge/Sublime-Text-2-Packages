@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Font-Family: Impact</string>
+        <key>uuid</key>
+        <string>185CF3F1-B132-4551-AB95-0479A054628C</string>
+        <key>tabTrigger</key>
+        <string>impact</string>
+        <key>content</key>
+        <string>Impact,Charcoal,FreeSerif,sans-serif;$0</string>
+        <key>scope</key>
+        <string>source.css</string>
+    </dict>
+</plist>

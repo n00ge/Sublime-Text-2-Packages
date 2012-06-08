@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Font Family: Tahoma</string>
+        <key>uuid</key>
+        <string>6D0997FD-A681-4BB2-84BC-FE530C537D7F</string>
+        <key>tabTrigger</key>
+        <string>tahoma</string>
+        <key>content</key>
+        <string>Tahoma,Geneva,Kalimati,sans-serif;</string>
+        <key>scope</key>
+        <string></string>
+    </dict>
+</plist>

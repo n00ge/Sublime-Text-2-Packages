@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Multi-Check</string>
+        <key>uuid</key>
+        <string>70D0B808-98A1-44BD-8CB9-380D13728229</string>
+        <key>tabTrigger</key>
+        <string>multicheck</string>
+        <key>content</key>
+        <string>&lt;fieldset class=&quot;multichoice&quot;&gt;
+	&lt;legend&gt;$1&lt;/legend&gt;
+	&lt;div class=&quot;checkbox&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;$2&quot; name=&quot;$2&quot; /&gt;&lt;label for=&quot;$2&quot;&gt;$3&lt;/label&gt;&lt;/div&gt;
+	&lt;div class=&quot;checkbox&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;$4&quot; name=&quot;$4&quot; /&gt;&lt;label for=&quot;$4&quot;&gt;$5&lt;/label&gt;&lt;/div&gt;
+	&lt;div class=&quot;checkbox&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;$6&quot; name=&quot;$6&quot; /&gt;&lt;label for=&quot;$6&quot;&gt;$7&lt;/label&gt;&lt;/div&gt;$8
+&lt;/fieldset&gt;</string>
+        <key>scope</key>
+        <string>text.html</string>
+    </dict>
+</plist>

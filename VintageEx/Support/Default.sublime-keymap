@@ -1,0 +1,40 @@
+[
+	{
+		"keys": [":"], "command": "vi_colon_input",
+		"context":
+		[
+			{ "key": "setting.command_mode", "operator": "equal", "operand": true }
+		]
+	},
+
+	{
+		"keys": [":"], "command": "vi_colon_input",
+		"args": {
+			"initial_text": ":'<,'>"
+		},
+		"context":
+		[
+			{ "key": "setting.command_mode", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": false }
+		]
+	},
+
+	{
+		"keys": ["up"], "command": "cycle_cmdline_history",
+		"args": {
+			"backwards": true
+		},
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.excmdline" }
+		]
+	},
+
+	{
+		"keys": ["down"], "command": "cycle_cmdline_history",
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.excmdline" }
+		]
+	}
+]

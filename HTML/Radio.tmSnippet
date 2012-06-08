@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>name</key>
+        <string>Radio</string>
+        <key>uuid</key>
+        <string>B774885F-CFD2-40F9-91BF-9B6016F3D18E</string>
+        <key>tabTrigger</key>
+        <string>radio</string>
+        <key>content</key>
+        <string>&lt;div class="radio"&gt;&lt;input type="radio" name="$1" id="$2"${3: checked="checked"} /&gt;&lt;label for="$2"&gt;$4&lt;/label&gt;&lt;/div&gt;$0</string>
+        <key>scope</key>
+        <string>text.html</string>
+    </dict>
+</plist>
