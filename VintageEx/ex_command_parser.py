@@ -271,6 +271,17 @@ EX_COMMANDS = {
                                 ),
                                 error_on=()
                                 ),
+    ('&&', '&&'): ex_cmd_data(
+                                command='ex_double_ampersand',
+                                # We don't want to mantain flag values here, so accept anything and
+                                # let :substitute handle the values.
+                                invocations=(re.compile(r'(?P<flags>.+?)\s*(?P<count>[0-9]+)'),
+                                             re.compile(r'\s*(?P<flags>.+?)\s*'),
+                                             re.compile(r'\s*(?P<count>[0-9]+)\s*'),
+                                             re.compile(r'^$'),
+                                ),
+                                error_on=()
+                                ),
     ('shell', 'sh'): ex_cmd_data(
                                 command='ex_shell',
                                 invocations=(),
@@ -337,6 +348,13 @@ EX_COMMANDS = {
                                 invocations=(),
                                 error_on=()
                                 ),
+    ('only', 'on'): ex_cmd_data(
+                                command='ex_only',
+                                invocations=(re.compile(r'^$',),
+                                ),
+                                error_on=(ex_error.ERR_TRAILING_CHARS,
+                                          ex_error.ERR_NO_RANGE_ALLOWED,)
+                                ),
     (':', ':'): ex_cmd_data(
                         command='ex_goto',
                         invocations=(),
@@ -379,11 +397,15 @@ def get_cmd_line_range(cmd_line):
     return cmd_line[start:end]
 
 
+def is_valid_command_name(cmd_name):
+    return (cmd_name[0].isalpha() or cmd_name[0] in r"&")
+
+
 def extract_command_name(cmd_line):
     if cmd_line[0] in ':!':
         return cmd_line[0]
     if cmd_line:
-        return ''.join(takewhile(lambda c: c.isalpha(), cmd_line))
+        return ''.join(takewhile(lambda c: is_valid_command_name(c), cmd_line))
 
 
 def parse_command(cmd):
@@ -403,7 +425,8 @@ def parse_command(cmd):
             cmd_name = cmd_name[len(range_):]
 
     # FIXME: is this needed?
-    if not (cmd_name.startswith(('!', ':')) or cmd_name[0].isalpha()):
+    if not (cmd_name.startswith(('!', ':')) or
+            is_valid_command_name(cmd_name[0])):
         return
 
     command = extract_command_name(cmd_name)

@@ -6,6 +6,7 @@
 		"Ruby on Rails": "ruby"
 	},
 	"color_scheme": "Packages/User/Railscast2.tmTheme",
+	// "color_scheme": "Packages/Color Scheme - Default/Mac Classic.tmTheme",
 	"draw_minimap_border": true,
 	"font_face": "DejaVu Sans Mono",
 	"font_options":

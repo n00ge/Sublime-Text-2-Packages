@@ -77,7 +77,7 @@ class StatusProcess(object):
         break
 
 def wrap_in_cd(path, command):
-  return 'cd ' + path.replace("\\", "/") + ' && ' + command
+  return 'cd ' + path.replace(" ", "\ ") + ' && ' + command
 
 class TestMethodMatcher(object):
   def __init__(self):
@@ -92,12 +92,15 @@ class TestMethodMatcher(object):
     @staticmethod
     def find_first_match(test_file_content):
       match_obj = re.search('\s?([a-zA-Z_\d]+tset)\s+fed', test_file_content) # 1st search for 'def test_name'
-      if not match_obj:
-        match_obj = re.search('\s?([\"\'][a-zA-Z_\s\d]+[\"\']\s+tset)', test_file_content) # 2nd search for 'test "name"'
-      if not match_obj:
-        return None
-      test_name = match_obj.group(1)[::-1]
-      return test_name.replace("\"", "").replace(" ", "_")
+      if match_obj:
+        return match_obj.group(1)[::-1]
+
+      match_obj = re.search('\s?[\"\']([a-zA-Z_\"\'\s\d]+)[\"\']\s+tset', test_file_content) # 2nd search for 'test "name"'
+      if match_obj:
+        test_name = match_obj.group(1)[::-1]
+        return "test_%s" % test_name.replace("\"", "\\\"").replace(" ", "_").replace("'", "\\'")
+
+      return None
 
   class ShouldaTest(object):
     @staticmethod
@@ -147,7 +150,7 @@ class BaseRubyTask(sublime_plugin.TextCommand):
 
   def append_data(self, proc, data):
     global output_view
-    str = data.decode("utf-8")
+    str = unicode(data, errors = "replace")
     str = str.replace('\r\n', '\n').replace('\r', '\n')
 
     selection_was_at_end = (len(output_view.sel()) == 1
@@ -176,7 +179,7 @@ class BaseRubyTask(sublime_plugin.TextCommand):
     def run_all_tests_command(self): return None
     def run_from_project_root(self, partition_folder, command, options = ""):
       folder_name, test_folder, file_name = os.path.join(self.folder_name, self.file_name).partition(partition_folder)
-      return wrap_in_cd(folder_name, command + " " + test_folder + file_name + options)
+      return wrap_in_cd(folder_name, command + " " + partition_folder + file_name + options)
     def get_current_line_number(self, view):
       char_under_cursor = view.sel()[0].a
       return view.rowcol(char_under_cursor)[0] + 1

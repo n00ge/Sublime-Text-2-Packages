@@ -1,7 +1,17 @@
+// {
+//   "ruby_unit_exec": "rvm-auto-ruby -Itest",
+//   "ruby_cucumber_exec": "cucumber --no-color",
+//   "ruby_rspec_exec": "rvm-auto-ruby -S bundle exec rspec",
+
+//   "ruby_unit_folder": "test",
+//   "ruby_cucumber_folder": "features",
+//   "ruby_rspec_folder": "spec"
+// }
 {
-  "ruby_unit_exec": "rvm-auto-ruby -Itest",
-  "ruby_cucumber_exec": "cucumber --no-color",
-  "ruby_rspec_exec": "rvm-auto-ruby -S bundle exec rspec",
+  "erb_exec": "bundle exec erb",
+  "ruby_unit_exec": "bundle exec ruby",
+  "ruby_cucumber_exec": "bundle exec cucumber -f pretty",
+  "ruby_rspec_exec": "bundle exec rspec",
 
   "ruby_unit_folder": "test",
   "ruby_cucumber_folder": "features",

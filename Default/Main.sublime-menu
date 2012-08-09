@@ -170,6 +170,7 @@
                     { "command": "swap_line_up" },
                     { "command": "swap_line_down" },
                     { "command": "duplicate_line" },
+                    { "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Line.sublime-macro"}, "caption": "Delete Line" },
                     { "command": "join_lines" }
                 ]
             },
@@ -335,6 +336,7 @@
             { "command": "find_under", "caption": "Quick Find" },
             { "command": "find_all_under", "caption": "Quick Find All" },
             { "command": "find_under_expand", "caption": "Quick Add Next" },
+            { "command": "find_under_expand_skip", "caption": "Quick Skip Next", "platform": "!OSX" },
             { "caption": "-" },
             { "command": "slurp_find_string", "caption": "Use Selection for Find" },
             { "command": "slurp_replace_string", "caption": "Use Selection for Replace" },
@@ -660,13 +662,21 @@
                 [
                     { "command": "set_build_system", "args": { "file": "" }, "caption": "Automatic", "checkbox": true },
                     { "caption": "-" },
-                    { "command": "$project_build_systems" },
+                    { "command": "set_build_system", "args": {"index": 0}, "checkbox": true },
+                    { "command": "set_build_system", "args": {"index": 1}, "checkbox": true },
+                    { "command": "set_build_system", "args": {"index": 2}, "checkbox": true },
+                    { "command": "set_build_system", "args": {"index": 3}, "checkbox": true },
+                    { "command": "set_build_system", "args": {"index": 4}, "checkbox": true },
+                    { "command": "set_build_system", "args": {"index": 5}, "checkbox": true },
+                    { "command": "set_build_system", "args": {"index": 6}, "checkbox": true },
+                    { "command": "set_build_system", "args": {"index": 7}, "checkbox": true },
                     { "command": "$build_systems" },
                     { "caption": "-" },
                     { "command": "new_build_system", "caption": "New Build System…" }
                 ]
             },
             { "command": "build", "mnemonic": "B" },
+            { "command": "build", "args": {"variant": "Run"}, "mnemonic": "R" },
             { "command": "exec", "args": {"kill": true}, "caption": "Cancel Build", "mnemonic": "C" },
             {
                 "caption": "Build Results",
@@ -789,8 +799,9 @@
             { "command": "open_url", "args": {"url": "http://www.sublimetext.com/docs/2/"}, "caption": "Documentation" },
             { "command": "open_url", "args": {"url": "http://twitter.com/sublimehq"}, "caption": "Twitter" },
             { "caption": "-" },
-            { "command": "open_url", "args": {"url": "http://www.sublimetext.com/buy"}, "caption": "Purchase License" },
+            { "command": "purchase_license"},
             { "command": "show_license_window", "caption": "Enter License" },
+            { "command": "remove_license"},
             { "caption": "-" },
             { "command": "show_about_window", "caption": "About Sublime Text 2", "mnemonic": "A" }
         ]

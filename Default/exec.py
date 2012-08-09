@@ -3,6 +3,7 @@ import os, sys
 import thread
 import subprocess
 import functools
+import time
 
 class ProcessListener(object):
     def on_data(self, proc, data):
@@ -22,6 +23,8 @@ class AsyncProcess(object):
 
         self.listener = listener
         self.killed = False
+
+        self.start_time = time.time()
 
         # Hide the console window on Windows
         startupinfo = None
@@ -56,11 +59,14 @@ class AsyncProcess(object):
     def kill(self):
         if not self.killed:
             self.killed = True
-            self.proc.kill()
+            self.proc.terminate()
             self.listener = None
 
     def poll(self):
         return self.proc.poll() == None
+
+    def exit_code(self):
+        return self.proc.poll()
 
     def read_stdout(self):
         while True:
@@ -105,7 +111,7 @@ class ExecCommand(sublime_plugin.WindowCommand, ProcessListener):
 
         # Default the to the current files directory if no working directory was given
         if (working_dir == "" and self.window.active_view()
-                        and self.window.active_view().file_name() != ""):
+                        and self.window.active_view().file_name()):
             working_dir = os.path.dirname(self.window.active_view().file_name())
 
         self.output_view.settings().set("result_file_regex", file_regex)
@@ -122,8 +128,11 @@ class ExecCommand(sublime_plugin.WindowCommand, ProcessListener):
         self.proc = None
         if not self.quiet:
             print "Running " + " ".join(cmd)
+            sublime.status_message("Building")
 
-        self.window.run_command("show_panel", {"panel": "output.exec"})
+        show_panel_on_build = sublime.load_settings("Preferences.sublime-settings").get("show_panel_on_build", True)
+        if show_panel_on_build:
+            self.window.run_command("show_panel", {"panel": "output.exec"})
 
         merged_env = env.copy()
         if self.window.active_view():
@@ -145,6 +154,12 @@ class ExecCommand(sublime_plugin.WindowCommand, ProcessListener):
             self.proc = AsyncProcess(cmd, merged_env, self, **kwargs)
         except err_type as e:
             self.append_data(None, str(e) + "\n")
+            self.append_data(None, "[cmd:  " + str(cmd) + "]\n")
+            self.append_data(None, "[dir:  " + str(os.getcwdu()) + "]\n")
+            if "PATH" in merged_env:
+                self.append_data(None, "[path: " + str(merged_env["PATH"]) + "]\n")
+            else:
+                self.append_data(None, "[path: " + str(os.environ["PATH"]) + "]\n")
             if not self.quiet:
                 self.append_data(None, "[Finished]")
 
@@ -165,7 +180,7 @@ class ExecCommand(sublime_plugin.WindowCommand, ProcessListener):
         try:
             str = data.decode(self.encoding)
         except:
-            str = "[Decode error - output not " + self.encoding + "]"
+            str = "[Decode error - output not " + self.encoding + "]\n"
             proc = None
 
         # Normalize newlines, Sublime Text always uses a single \n separator
@@ -185,9 +200,21 @@ class ExecCommand(sublime_plugin.WindowCommand, ProcessListener):
 
     def finish(self, proc):
         if not self.quiet:
-            self.append_data(proc, "[Finished]")
+            elapsed = time.time() - proc.start_time
+            exit_code = proc.exit_code()
+            if exit_code == 0 or exit_code == None:
+                self.append_data(proc, ("[Finished in %.1fs]") % (elapsed))
+            else:
+                self.append_data(proc, ("[Finished in %.1fs with exit code %d]") % (elapsed, exit_code))
+
         if proc != self.proc:
             return
+
+        errs = self.output_view.find_all_results()
+        if len(errs) == 0:
+            sublime.status_message("Build finished")
+        else:
+            sublime.status_message(("Build finished with %d errors") % len(errs))
 
         # Set the selection to the start, so that next_result will work as expected
         edit = self.output_view.begin_edit()

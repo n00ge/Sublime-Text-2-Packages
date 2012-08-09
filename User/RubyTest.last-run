@@ -1,4 +1,4 @@
 {
-	"last_test_file": "cash_transactions_spec.rb",
-	"last_test_run": "cd /Users/n00ge/Rails/market_art_ems/ && rvm-auto-ruby -S bundle exec rspec spec/requests/ems/cash_transactions_spec.rb"
+	"last_test_file": "activities_spec.rb",
+	"last_test_run": "cd /Users/n00ge/Rails/oc_ski_club/membership && bundle exec rspec spec/requests/activities_spec.rb"
 }

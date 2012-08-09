@@ -5,8 +5,7 @@
 // example, in Packages/Python/Python.sublime-settings for python files.
 {
     // Sets the colors used within the text area
-    "color_scheme": "Packages/User/Monokai.tmTheme", 
-    // Monokai
+    "color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 
     // Note that the font_face and font_size are overriden in the platform
     // specific settings file, for example, "Preferences (Linux).sublime-settings".
@@ -290,6 +289,9 @@
     // dock icon, this controls if a new window is created or not.
     "open_files_in_new_window": true,
 
+    // OS X only: This controls if an empty window is created at startup or not.
+    "create_window_at_startup": true,
+
     // Set to true to close windows as soon as the last file is closed, unless
     // there's a folder open within the window. This is always enabled on OS X,
     // changing it here won't modify the behavior.
@@ -299,6 +301,14 @@
     // On OS X, this value is overridden in the platform specific settings, so
     // you'll need to place this line in your user settings to override it.
     "show_full_path": true,
+
+    // Shows the Build Results panel when building. If set to false, the Build
+    // Results can be shown via the Tools/Build Results menu.
+    "show_panel_on_build": true,
+
+    // Preview file contents when clicking on a file in the side bar. Double
+    // clicking or editing the preview will open the file and assign it a tab.
+    "preview_on_click": true,
 
     // folder_exclude_patterns and file_exclude_patterns control which files
     // are listed in folders on the side bar. These can also be set on a per-

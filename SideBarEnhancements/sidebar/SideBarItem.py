@@ -5,7 +5,11 @@ import re
 import shutil
 
 from SideBarProject import SideBarProject
-import desktop
+
+try:
+	import desktop
+except:
+	pass
 
 class Object():
 	pass
@@ -94,7 +98,7 @@ class SideBarItem:
 		if path == '':
 			return '.'
 		else:
-			return './'+re.sub('^/+', '', path)
+			return re.sub('^/+', '', path)
 
 	def forCwdSystemPathRelativeFromRecursive(self, relativeFrom):
 		relative = SideBarItem(relativeFrom, os.path.isdir(relativeFrom))
@@ -103,9 +107,9 @@ class SideBarItem:
 			return '.'
 		else:
 			if self.isDirectory():
-				return './'+re.sub('^/+', '', path)+'/'
+				return re.sub('^/+', '', path)+'/'
 			else:
-				return './'+re.sub('^/+', '', path)
+				return re.sub('^/+', '', path)
 
 	def dirnameSystem(self):
 		import sys
@@ -225,7 +229,10 @@ class SideBarItem:
 	def move(self, location, replace = False):
 		location = SideBarItem(location, os.path.isdir(location));
 		if location.exists() and replace == False:
-			return False
+			if self.path().lower() == location.path().lower():
+				pass
+			else:
+				return False
 		elif location.exists() and location.isFile():
 			os.remove(location.path())
 

@@ -9,6 +9,13 @@
 # to assume that those two things exist in the provided
 # project path.
 
+function load_rbenv(){
+  if [ -d $HOME/.rbenv ]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+  fi
+}
+
 function load_rvm_as_a_function() {
   # Here I load rvm as a bash function rather than a binary. I do
   # this because the binary version is limited and won't properly
@@ -30,12 +37,16 @@ function load_rvm_as_a_function() {
 }
 
 function run_guard() {
-  printf "Running 'bundle exec guard'. All output/failures from this point on is from the 'bundle exec guard' command.\n\n"
-  cd "$1" && bundle exec guard
+  cmd="guard"
+  if [[ -s "Gemfile" ]] ; then
+    cmd="bundle exec guard"
+  fi
+  printf "Running '$cmd'. All output/failures from this point on is from the '$cmd' command.\n\n"
+  cd "$1" && $cmd
 }
 
 echo "Starting Guard for $1"
-
+load_rbenv # if we give rbenv shims life here, the attempt to use 'system gemset' below will succeed
 load_rvm_as_a_function
 if [ $? -ne 0 ]; then # failed to load rvm
   printf "Couldn't find or load RVM.\n"

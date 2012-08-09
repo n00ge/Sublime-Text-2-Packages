@@ -17,7 +17,8 @@ from plat.windows import get_startup_info
 import ex_error
 import ex_range
 import shell
-
+from vintageex import substitute
+from vintageex import global_command
 
 GLOBAL_RANGES = []
 
@@ -412,50 +413,82 @@ class ExCopy(sublime_plugin.TextCommand):
         self.view.sel().add(sublime.Region(cursor_dest, cursor_dest))
 
 
+class ExOnly(sublime_plugin.TextCommand):
+    """ Command: :only
+    """
+    def run(self, edit, forced=False):
+        if not forced:
+            if is_any_buffer_dirty(self.view.window()):
+                ex_error.display_error(ex_error.ERR_OTHER_BUFFER_HAS_CHANGES)
+                return
+
+        w = self.view.window()
+        current_id = self.view.id()
+        for v in w.views():
+            if v.id() != current_id:
+                if forced and v.is_dirty():
+                    v.set_scratch(True)
+                w.focus_view(v)
+                w.run_command('close')
+
+
+class ExDoubleAmpersand(sublime_plugin.TextCommand):
+    """ Command :&&
+    """
+    def run(self, edit, range='.', flags='', count=''):
+        self.view.run_command('ex_substitute', {'range': range,
+                                                'pattern': flags + count})
+
+
 class ExSubstitute(sublime_plugin.TextCommand):
-    last_pattern = None
-    last_flags = ''
-    parts_rgex = re.compile(r"([:/])(.*?)(\1)(.*?)(\1)([a-zA-Z]+)?( \d+)?")
+    most_recent_pat = None
+    most_recent_flags = ''
+    most_recent_replacement = ''
+
     def run(self, edit, range='.', pattern=''):
         range = range or '.'
 
-        # we either accept a full pattern plus flags and count arg
-        # ... or ...
-        # simply a command in the following forms:
-        #   :s
-        #   :s gi
-        #   :s gi 10
-        #   :s 10
-        try:
-            sep, left, _, right, _, flags, count = \
-                            ExSubstitute.parts_rgex.search(pattern).groups()
-            ExSubstitute.last_pattern = (left, right)
-            ExSubstitute.last_flags = flags
-        except AttributeError:
-            if not ExSubstitute.last_pattern:
-                sublime.status_message("VintageEx: No pattern available.")
+        # :s
+        if not pattern:
+            pattern = ExSubstitute.most_recent_pat
+            replacement = ExSubstitute.most_recent_replacement
+            flags = ''
+            count = 0
+        # :s g 100 | :s/ | :s// | s:/foo/bar/g 100 | etc.
+        else:
+            try:
+                parts = substitute.split(pattern)
+            except SyntaxError, e:
+                sublime.status_message("VintageEx: (substitute) %s" % e)
+                print "VintageEx: (substitute) %s" % e
                 return
-            left, _, right = pattern.strip().partition(' ')
-            flags, count = '', None
-            if left and left.strip().isalpha():
-                flags = left
-                if right and right.isdigit():
-                    count = int(right)
-                elif right:
-                    sublime.status_message('VintageEx: Bad pattern.')
-                    return
-            elif left and left.strip().isdigit():
-                count = int(left)
-
-            if flags or count:
-                pattern = ''
+            else:
+                if len(parts) == 4:
+                    # This is a full command in the form :s/foo/bar/g 100 or a
+                    # partial version of it.
+                    (pattern, replacement, flags, count) = parts
+                else:
+                    # This is a short command in the form :s g 100 or a partial
+                    # version of it.
+                    (flags, count) = parts
+                    pattern = ExSubstitute.most_recent_pat
+                    replacement = ExSubstitute.most_recent_replacement
 
         if not pattern:
-            left, right = ExSubstitute.last_pattern
+            pattern = ExSubstitute.most_recent_pat
+        else:
+            ExSubstitute.most_recent_pat = pattern
+            ExSubstitute.most_recent_replacement = replacement
+            ExSubstitute.most_recent_flags = flags
 
-        re_flags = 0
-        re_flags |= re.IGNORECASE if (flags and 'i' in flags) else 0
-        left = re.compile(left, flags=re_flags)
+        computed_flags = 0
+        computed_flags |= re.IGNORECASE if (flags and 'i' in flags) else 0
+        try:
+            pattern = re.compile(pattern, flags=computed_flags)
+        except Exception, e:
+            sublime.status_message("VintageEx [regex error]: %s ... in pattern '%s'" % (e.message, pattern))
+            print "VintageEx [regex error]: %s ... in pattern '%s'" % (e.message, pattern)
+            return
 
         if count and range == '.':
             range = '.,.+%d' % int(count)
@@ -475,7 +508,7 @@ class ExSubstitute(sublime_plugin.TextCommand):
             if self.view.substr(r.end() - 1) == '\n':
                 r = sublime.Region(r.begin(), r.end() - 1)
             line_text = self.view.substr(self.view.line(r))
-            rv = re.sub(left, right, line_text, count=replace_count)
+            rv = re.sub(pattern, replacement, line_text, count=replace_count)
             self.view.replace(edit, self.view.line(r), rv)
 
 
@@ -527,13 +560,20 @@ class ExGlobal(sublime_plugin.TextCommand):
 
         :g!/DON'T TOUCH THIS/delete
     """
+    most_recent_pat = None
     def run(self, edit, range='%', forced=False, pattern=''):
         try:
-            _, global_pattern, subcmd = pattern.split(pattern[0], 2)
+            global_pattern, subcmd = global_command.split(pattern)
         except ValueError:
-            sublime.status_message("VintageEx: Bad :global pattern. (:%sglobal%s)" % (range, pattern))
+            msg = "VintageEx: Bad :global pattern. (:%sglobal%s)" % (range, pattern)
+            sublime.status_message(msg)
+            print msg
             return
 
+        if global_pattern:
+            ExGlobal.most_recent_pat = global_pattern
+        else:
+            global_pattern = ExGlobal.most_recent_pat
         # Make sure we always have a subcommand to exectute. This is what
         # Vim does too.
         subcmd = subcmd or 'print'
@@ -541,7 +581,13 @@ class ExGlobal(sublime_plugin.TextCommand):
         rs = get_region_by_range(self.view, range)
 
         for r in rs:
-            match = re.search(global_pattern, self.view.substr(r))
+            try:
+                match = re.search(global_pattern, self.view.substr(r))
+            except Exception, e:
+                msg = "VintageEx (global): %s ... in pattern '%s'" % (str(e), global_pattern)
+                sublime.status_message(msg)
+                print msg
+                return
             if (match and not forced) or (not match and forced):
                 GLOBAL_RANGES.append(r)
 

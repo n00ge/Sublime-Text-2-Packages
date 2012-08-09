@@ -86,9 +86,11 @@
 	// Middle click paste
 	{ "button": "button3", "command": "paste_selection_clipboard" },
 
-	// Switch files with buttons 4 and 5
+	// Switch files with buttons 4 and 5, as well as 8 and 9
 	{ "button": "button4", "modifiers": [], "command": "prev_view" },
 	{ "button": "button5", "modifiers": [], "command": "next_view" },
+	{ "button": "button8", "modifiers": [], "command": "prev_view" },
+	{ "button": "button9", "modifiers": [], "command": "next_view" },
 
 	// Change font size with ctrl+scroll wheel
 	{ "button": "scroll_down", "modifiers": ["ctrl"], "command": "decrease_font_size" },

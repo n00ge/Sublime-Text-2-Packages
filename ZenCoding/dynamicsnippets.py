@@ -14,6 +14,7 @@ import sublime_plugin
 class CommandsAsYouTypeBase(sublime_plugin.TextCommand):
     history = {}
     filter_input = lambda s, i: i
+    grammar = None
 
     def run_command(self, view, value):
         if '\n' in value:
@@ -50,8 +51,21 @@ class CommandsAsYouTypeBase(sublime_plugin.TextCommand):
 
         panel = self.view.window().show_input_panel (
           self.input_message, self.default_input, None, self.insert, self.undo )
-        
+
         panel.sel().clear()
         panel.sel().add(sublime.Region(0, panel.size()))
+
+        if self.grammar:
+            panel.set_syntax_file(self.grammar)
+            setting = panel.settings().set
+
+            # For some reason we can't set these in the
+            # `ZenCoding/ZenCoding.sublime-settings`, only in
+            # `User/ZenCoding.sublime-settings`, only in
+            setting('line_numbers',   False)
+            setting('gutter',         False)
+            setting('auto_complete',  False)
+            setting('tab_completion', False)
+            setting('auto_id_class',  True)
 
 ################################################################################

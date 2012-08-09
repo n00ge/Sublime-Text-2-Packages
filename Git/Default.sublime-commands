@@ -1,5 +1,8 @@
 [
-    {
+    {   "caption": "Git: Init",
+        "command": "git_init"
+    }
+    ,{
         "caption": "Git: Blame",
         "command": "git_blame"
     }
@@ -40,12 +43,20 @@
         "command": "git_commit"
     }
     ,{
+        "caption": "Git: Amend Commit",
+        "command": "git_commit_amend"
+    }
+    ,{
         "caption": "Git: Quick Commit",
         "command": "git_quick_commit"
     }
     ,{
         "caption": "Git: Status",
         "command": "git_status"
+    }
+    ,{
+        "caption": "Git: Open Modified Files",
+        "command": "git_open_modified_files"
     }
     ,{
         "caption": "Git: New Branch",
@@ -58,6 +69,10 @@
     ,{
         "caption": "Git: Merge Branch",
         "command": "git_merge"
+    }
+    ,{
+        "caption": "Git: Delete Branch",
+        "command": "git_delete_branch"
     }
     ,{
         "caption": "Git: Stash Changes",
@@ -120,6 +135,30 @@
         "command": "git_custom"
     }
     ,{
+        "caption": "Git Flow: Feature Start", 
+        "command": "git_flow_feature_start"
+    }
+    ,{
+        "caption": "Git Flow: Feature Finish",
+        "command": "git_flow_feature_finish"
+    }
+    ,{
+        "caption": "Git Flow: Release Start",
+        "command": "git_flow_release_start"
+    }
+    ,{
+        "caption": "Git Flow: Release Finish",
+        "command": "git_flow_release_finish"
+    }
+    ,{
+        "caption": "Git Flow: Hotfix Start",
+        "command": "git_flow_hotfix_start"
+    }
+    ,{
+        "caption": "Git Flow: Hotfix Finish",
+        "command": "git_flow_hotfix_finish"
+    }
+    ,{
         "caption": "Git: Open...",
         "command": "git_open_file"
     }
@@ -130,6 +169,10 @@
     ,{
         "caption": "Git: Reset (unstage) All",
         "command": "git_reset_head_all"
+    }
+    ,{
+        "caption": "Git: Reset (hard) HEAD",
+        "command": "git_reset_hard_head"
     }
     ,{
         "caption": "Git: Add Selected Hunk",
@@ -146,5 +189,9 @@
     ,{
         "caption": "Git: Gitk",
         "command": "git_gitk"
+    }
+    ,{
+        "caption": "Git: Commit history",
+        "command": "git_commit_history"
     }
 ]

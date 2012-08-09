@@ -54,7 +54,10 @@ class ToggleCommentCommand(sublime_plugin.TextCommand):
     def remove_block_comment(self, view, edit, comment_data, region):
         (line_comments, block_comments) = comment_data
 
-        whole_region = view.extract_scope(region.begin())
+        # Call extract_scope from the midpoint of the region, as calling it
+        # from the start can give false results if the block comment begin/end
+        # markers are assigned their own scope, as is done in HTML.
+        whole_region = view.extract_scope(region.begin() + region.size() / 2)
 
         for c in block_comments:
             (start, end, disable_indent) = c
@@ -218,6 +221,11 @@ class ToggleCommentCommand(sublime_plugin.TextCommand):
                 line = sublime.Region(
                     advance_to_first_non_white_space_on_line(self.view, line.a),
                     line.b)
+
+                # Try and remove any existing block comment now
+                if self.remove_block_comment(self.view, edit, comment_data, line):
+                    continue
+
                 self.add_comment(self.view, edit, comment_data, block, line)
                 continue
 

@@ -119,7 +119,7 @@ class ZenEditor():
         view = active_view()
         return view.substr(view.line(view.sel()[0]))
 
-    def replace_content(self, value, start=None, end=None, zero_stops=False, 
+    def replace_content(self, value, start=None, end=None, zero_stops=False,
                               escape = True):
         """
         Replace editor's content or it's part (from *start* to
@@ -156,7 +156,7 @@ class ZenEditor():
             value = value.replace('$', r'\$')
 
         value = self.add_placeholders(value,
-            selection     = 0, 
+            selection     = 0,
             explicit_zero = zero_stops
         )
 
@@ -250,13 +250,12 @@ class ZenEditor():
 
         def get_ix(m):
             _ix[0] += 1
-            return '$%s' % _ix[0]
+            return '${%s}' % _ix[0]
 
         # text = re.sub(r'\$', '\\$', text)
         text = re.sub(utils.get_caret_placeholder(), get_ix, text)
 
         if selection:
-            # The last placeholder will contain the selected text, if any
-            text = re.sub('\$(%s)' % _ix[0], r'${\1:$SELECTION}', text)
+            text = re.sub(r'\$\{(%s)\}' % _ix[0], r'${\1:$SELECTION}', text)
 
         return text

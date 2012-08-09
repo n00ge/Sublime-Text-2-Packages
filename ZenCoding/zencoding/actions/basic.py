@@ -357,7 +357,7 @@ def match_pair_tagname(editor):
                     break
             end_pt = start_pt + len(open_tag.name)
             sels.append((start_pt, end_pt))
-        
+
         editor.create_selection(sels=sels)
 
         return True
@@ -770,7 +770,8 @@ def encode_to_base64(editor, img_path, pos):
 
     b64 = 'data:' + (mime_types[zen_file.get_ext(real_img_path)] or default_mime_type) + ';base64,' + b64
 
-    editor.replace_content('$0' + b64, pos, pos + len(img_path))
+    editor.replace_content(b64, pos, pos + len(img_path))
+    # editor.replace_content('$0' + b64, pos, pos + len(img_path))
     return True
 
 def decode_from_base64(editor, data, pos):
